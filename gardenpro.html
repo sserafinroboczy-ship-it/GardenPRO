@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GardenPRO — Profesjonalne usługi ogrodowe</title>
+  <meta name="description" content="GardenPRO — stała opieka nad ogrodem, regeneracja trawnika, cięcia roślin, porządki sezonowe i nowoczesny kontakt online." />
+  <style>
+    :root {
+      --bg: #08110d;
+      --bg-soft: #0d1813;
+      --card: rgba(255,255,255,0.06);
+      --card-strong: rgba(255,255,255,0.09);
+      --text: #f7faf8;
+      --muted: #b8c6bf;
+      --line: rgba(255,255,255,0.12);
+      --accent: #39d98a;
+      --accent-dark: #0b2016;
+      --accent-2: #4fd1c5;
+      --shadow: 0 20px 60px rgba(0,0,0,0.35);
+      --radius: 24px;
+      --radius-lg: 32px;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, rgba(57,217,138,0.16), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(79,209,197,0.14), transparent 24%),
+        linear-gradient(180deg, #07100d 0%, #0b1511 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(18px);
+      background: rgba(8,17,13,0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      font-size: 1.1rem;
+    }
+
+    .brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 18px;
+      font-weight: 700;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, color .18s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: var(--accent);
+      color: #062412;
+      box-shadow: 0 10px 26px rgba(57,217,138,0.22);
+    }
+    .btn-secondary {
+      background: rgba(255,255,255,0.05);
+      border-color: var(--line);
+      color: var(--text);
+    }
+    .btn-ghost {
+      background: rgba(57,217,138,0.08);
+      border-color: rgba(57,217,138,0.24);
+      color: #bff7da;
+    }
+
+    .hero {
+      padding: 72px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr 0.88fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(57,217,138,0.22);
+      background: rgba(57,217,138,0.10);
+      color: #bdf5d8;
+      font-size: 0.92rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.5rem, 5vw, 4.7rem);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p.lead {
+      margin: 22px 0 0;
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .stat, .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .stat {
+      padding: 18px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-panel {
+      padding: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.09), rgba(255,255,255,0.05));
+    }
+
+    .contact-panel h2 {
+      margin: 6px 0 18px;
+      font-size: 1.8rem;
+    }
+
+    .contact-panel label {
+      display: block;
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .field, .select, .textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(4,10,8,0.8);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      outline: none;
+      font: inherit;
+    }
+
+    .field::placeholder, .textarea::placeholder { color: #8da198; }
+    .form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    section.block {
+      padding: 34px 0 12px;
+    }
+
+    .section-head {
+      margin-bottom: 24px;
+      max-width: 760px;
+    }
+
+    .section-head h2 {
+      margin: 8px 0 10px;
+      font-size: clamp(1.9rem, 3vw, 2.8rem);
+    }
+
+    .section-head p, .muted { color: var(--muted); }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card, .benefit-card, .step, .contact-box, .gallery-card, .review-card {
+      padding: 22px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .service-card h3, .benefit-card h3, .gallery-card h3, .review-card h3 { margin-top: 0; }
+    .service-card p, .benefit-card p, .gallery-card p, .review-card p { color: var(--muted); }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .step-num {
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent);
+      color: #062412;
+      font-weight: 800;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 20px;
+    }
+
+    .contact-box strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 1.05rem;
+    }
+
+    .gallery-card {
+      min-height: 160px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+    }
+
+    .quote {
+      border-left: 3px solid var(--accent);
+      padding-left: 14px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .form-card {
+      padding: 28px;
+    }
+
+    .footer {
+      border-top: 1px solid var(--line);
+      margin-top: 28px;
+      padding: 26px 0 50px;
+      color: var(--muted);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .note {
+      margin-top: 12px;
+      font-size: 0.92rem;
+      color: #9bb0a7;
+    }
+
+    .highlight {
+      color: #c6f6df;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .stats, .contact-grid { grid-template-columns: 1fr; }
+      .nav-inner { align-items: flex-start; }
+    }
+
+    @media (max-width: 720px) {
+      .hero { padding-top: 44px; }
+      .nav-links { display: none; }
+      .container { width: min(var(--max), calc(100% - 22px)); }
+      .contact-panel, .service-card, .benefit-card, .step, .contact-box, .gallery-card, .review-card, .form-card { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Garden<span>PRO</span></div>
+      <div class="nav-links">
+        <a href="#oferta">Oferta</a>
+        <a href="#wspolpraca">Współpraca</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#opinie">Opinie</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#formularz" class="btn btn-secondary" style="padding:10px 16px;">Wyślij zgłoszenie</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">GardenPRO • nowoczesne usługi ogrodowe</div>
+        <h1>Schludna i profesjonalna opieka nad ogrodem</h1>
+        <p class="lead">
+          Stała pielęgnacja ogrodów, regeneracja trawnika, cięcia roślin, porządki sezonowe oraz wygodny kontakt online. Strona została przygotowana tak, aby klient mógł szybko sprawdzić ofertę i od razu wysłać zgłoszenie.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#formularz">Wyślij zgłoszenie</a>
+          <a class="btn btn-secondary" href="#oferta">Zobacz ofertę</a>
+          <a class="btn btn-ghost" href="tel:+48000000000">Zadzwoń</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>Stała</strong><span>opieka nad ogrodem</span></div>
+          <div class="stat"><strong>Jednorazowe</strong><span>realizacje i porządki</span></div>
+          <div class="stat"><strong>Szybki</strong><span>kontakt i formularz</span></div>
+        </div>
+      </div>
+
+      <div class="card contact-panel">
+        <div class="eyebrow" style="margin-bottom:10px;">Szybki kontakt</div>
+        <h2>Umów wycenę ogrodu</h2>
+        <div class="form-grid">
+          <input class="field" type="text" placeholder="Imię i nazwisko" />
+          <input class="field" type="tel" placeholder="Telefon" />
+          <input class="field" type="email" placeholder="Adres e-mail" />
+          <select class="select">
+            <option>Wybierz usługę</option>
+            <option>Stała opieka nad ogrodem</option>
+            <option>Regeneracja trawnika</option>
+            <option>Cięcia i formowanie roślin</option>
+            <option>Porządki sezonowe</option>
+            <option>Nasadzenia i modernizacje</option>
+            <option>Inne prace</option>
+          </select>
+          <textarea class="textarea" rows="5" placeholder="Krótko opisz ogród lub zakres prac"></textarea>
+          <a class="btn btn-primary" href="#formularz">Przejdź do formularza</a>
+          <div class="note">To jest gotowy front-end do GitHuba. Po publikacji formularz można podłączyć np. do Formspree albo Netlify Forms.</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="block">
+    <div class="container grid-2">
+      <div class="benefit-card">
+        <div class="eyebrow">O firmie</div>
+        <h2 style="margin-top:0;">GardenPRO</h2>
+        <p>
+          Strona jest przygotowana pod usługi ogrodowe prowadzone w sposób uporządkowany, estetyczny i profesjonalny. Klient ma szybko znaleźć najważniejsze informacje, zobaczyć zakres prac i łatwo przejść do kontaktu.
+        </p>
+      </div>
+      <div class="benefit-card">
+        <div class="eyebrow">Dlaczego warto</div>
+        <p class="quote">Schludne wykonanie, jasny zakres prac, przewidywalność kosztów i komunikacja dopasowana do klienta.</p>
+        <p><span class="highlight">✓</span> Stała opieka lub jednorazowe realizacje</p>
+        <p><span class="highlight">✓</span> Prace dopasowane do etapu sezonu</p>
+        <p><span class="highlight">✓</span> Wygodny kontakt: telefon, e-mail, WhatsApp, formularz</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="oferta" class="block">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Oferta</div>
+        <h2>Zakres usług</h2>
+        <p>Poniżej masz gotowy układ sekcji ofertowej. Teksty można potem podmienić na Twoje docelowe opisy z ogłoszeń i oferty.</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="service-card">
+          <h3>Stała opieka nad ogrodem</h3>
+          <p>Regularne wizyty, harmonogram prac, bieżąca kontrola stanu roślin i trawnika oraz plan pielęgnacji dopasowany do sezonu.</p>
+        </article>
+        <article class="service-card">
+          <h3>Regeneracja trawnika</h3>
+          <p>Wertykulacja, aeracja, nawożenie, dosiew, wałowanie i kompleksowe odświeżenie trawnika zgodnie ze sztuką ogrodniczą.</p>
+        </article>
+        <article class="service-card">
+          <h3>Cięcia i formowanie roślin</h3>
+          <p>Przycinanie żywopłotów, krzewów ozdobnych, iglaków i innych nasadzeń z dbałością o estetykę oraz odpowiedni termin wykonania.</p>
+        </article>
+        <article class="service-card">
+          <h3>Porządki sezonowe</h3>
+          <p>Wiosenne i jesienne uporządkowanie ogrodu, grabienie, usuwanie odpadów zielonych i przygotowanie terenu do kolejnych prac.</p>
+        </article>
+        <article class="service-card">
+          <h3>Nasadzenia i modernizacje</h3>
+          <p>Dobór roślin, uzupełnianie rabat, poprawa kompozycji oraz estetyczne zmiany w ogrodzie dopasowane do warunków miejsca.</p>
+        </article>
+        <article class="service-card">
+          <h3>Usługi specjalistyczne</h3>
+          <p>Indywidualne realizacje, trudniejsze prace terenowe, pielęgnacja wymagających ogrodów oraz działania planowane etapowo.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="wspolpraca" class="block">
+    <div class="container grid-2">
+      <div>
+        <div class="section-head">
+          <div class="eyebrow">Jak wygląda współpraca</div>
+          <h2>Prosty i czytelny proces</h2>
+        </div>
+        <div class="step"><div class="step-num">1</div><div>Kontakt przez formularz, telefon lub e-mail.</div></div>
+        <div class="step"><div class="step-num">2</div><div>Krótka konsultacja i ustalenie potrzeb klienta.</div></div>
+        <div class="step"><div class="step-num">3</div><div>Oględziny ogrodu oraz wstępna wycena.</div></div>
+        <div class="step"><div class="step-num">4</div><div>Ustalenie zakresu prac i terminu realizacji.</div></div>
+        <div class="step"><div class="step-num">5</div><div>Wykonanie usługi lub rozpoczęcie stałej współpracy.</div></div>
+      </div>
+
+      <div id="kontakt" class="benefit-card">
+        <div class="eyebrow">Kontakt</div>
+        <h2 style="margin-top:0;">Klient ma trafić do Ciebie szybko</h2>
+        <p>Przyciski możesz podpiąć do telefonu, skrzynki e-mail, WhatsAppa lub formularza. Poniżej wstawiłem przykładowe dane do podmiany.</p>
+        <div class="contact-grid">
+          <a class="contact-box" href="tel:+48000000000"><span class="muted">Telefon</span><strong>+48 000 000 000</strong></a>
+          <a class="contact-box" href="mailto:kontakt@gardenpro.pl"><span class="muted">E-mail</span><strong>kontakt@gardenpro.pl</strong></a>
+          <a class="contact-box" href="#formularz"><span class="muted">Formularz</span><strong>Zgłoszenie online</strong></a>
+          <a class="contact-box" href="https://wa.me/48000000000"><span class="muted">WhatsApp</span><strong>Napisz wiadomość</strong></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" class="block">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Galeria</div>
+        <h2>Miejsce na realizacje</h2>
+        <p>Na GitHubie możesz później dodać swoje zdjęcia i podmienić te karty na prawdziwą galerię realizacji.</p>
+      </div>
+      <div class="grid-3">
+        <div class="gallery-card"><h3>Stała opieka</h3><p>Zdjęcie ogrodu przed i po pielęgnacji.</p></div>
+        <div class="gallery-card"><h3>Regeneracja trawnika</h3><p>Zdjęcie trawnika po wykonaniu zabiegów.</p></div>
+        <div class="gallery-card"><h3>Cięcia i porządki</h3><p>Zdjęcie żywopłotów, rabat lub nasadzeń po usłudze.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="opinie" class="block">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Opinie</div>
+        <h2>Miejsce na rekomendacje klientów</h2>
+      </div>
+      <div class="grid-3">
+        <div class="review-card"><h3>Opinia 1</h3><p>Tu możesz wkleić krótką opinię klienta dotyczącą jakości pracy, terminowości i efektu końcowego.</p></div>
+        <div class="review-card"><h3>Opinia 2</h3><p>Tu możesz dodać opinię ze stałej współpracy i podkreślić regularność oraz przewidywalność opieki.</p></div>
+        <div class="review-card"><h3>Opinia 3</h3><p>Tu możesz dodać opinię po jednorazowej realizacji, np. regeneracji trawnika albo cięciu roślin.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="formularz" class="block">
+    <div class="container">
+      <div class="card form-card">
+        <div class="section-head" style="margin-bottom:18px;">
+          <div class="eyebrow">Formularz kontaktowy</div>
+          <h2>Wyślij zgłoszenie do GardenPRO</h2>
+          <p>To gotowy wizualnie formularz. Po publikacji na GitHubie można go łatwo podłączyć do odbioru wiadomości.</p>
+        </div>
+
+        <form class="form-grid" onsubmit="event.preventDefault(); alert('To jest wersja demonstracyjna formularza. Po wdrożeniu można go podłączyć do wysyłki wiadomości.');">
+          <div class="grid-2">
+            <input class="field" type="text" placeholder="Imię i nazwisko" required>
+            <input class="field" type="tel" placeholder="Telefon" required>
+          </div>
+          <div class="grid-2">
+            <input class="field" type="email" placeholder="Adres e-mail">
+            <input class="field" type="text" placeholder="Miejscowość / lokalizacja ogrodu">
+          </div>
+          <textarea class="textarea" rows="6" placeholder="Opisz, czego dotyczy zgłoszenie — np. stała opieka, regeneracja trawnika, cięcia, porządki sezonowe"></textarea>
+          <button class="btn btn-primary" type="submit">Wyślij zgłoszenie</button>
+        </form>
+
+        <div class="note">
+          Miejsca do podmiany: <strong>telefon</strong>, <strong>e-mail</strong>, <strong>WhatsApp</strong>, teksty usług i galeria zdjęć.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 GardenPRO. Profesjonalne usługi ogrodowe.</div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="#oferta">Oferta</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#kontakt">Kontakt</a>
+        <a href="#formularz">Formularz</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
